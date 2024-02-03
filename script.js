@@ -25,41 +25,54 @@ function playerRound(computerChoice, playerChoice){
     }
 }
 
+let buttonsChoices = document.querySelectorAll(".choice")
+let buttonsStart = document.querySelectorAll(".start")
+
+let placar = document.querySelector("#placar")
+
+
 function playGame(){
     let computerScore = 0
     let playerScore = 0
     let playerChoice = ""
-    let rock = document.querySelector("#rock")
-    let paper = document.querySelector("#paper")
-    let scissors = document.querySelector("#scissors")
-    let buttons = document.querySelectorAll("button")
-        buttons.forEach(button => {
+    document.querySelector("#player-score").innerHTML = playerScore.toString()
+    document.querySelector("#computer-score").innerHTML = computerScore.toString()
+        buttonsChoices.forEach(button => {
             button.addEventListener("click", function(){
+                if(computerScore >= 5 || playerScore >= 5){
+                    computerScore = 0
+                    playerScore = 0
+                    document.querySelector("#player-score").innerHTML = playerScore.toString()
+                    document.querySelector("#computer-score").innerHTML = computerScore.toString()
+                }
                 playerChoice = this.textContent
                 let computerChoice = getComputerChoice()
                 if(playerRound(computerChoice, playerChoice) == "You Win!"){
                     playerScore++
+                    document.querySelector("#player-score").innerHTML = playerScore.toString()
                 }else if(playerRound(computerChoice, playerChoice) == "You Lose!"){
                     computerScore++
+                    document.querySelector("#computer-score").innerHTML = computerScore.toString()
                 }else {
                     computerScore++
                     playerScore++
+                    document.querySelector("#player-score").innerHTML = playerScore.toString()
+                    document.querySelector("#computer-score").innerHTML = computerScore.toString()
                 }
-                console.log("Player Choice: " + playerChoice + "\n" + "Computer Choice: " + computerChoice)
-                console.log("Round: " + "\n" + "---- The score -----\nPlayer: " + playerScore + "\n"+ "Computer: " + computerScore) 
                 if(computerScore == 5 || playerScore == 5){
                     if(computerScore > playerScore){
-                        console.log("You Lose!")
+                        document.querySelector("#resultado").innerHTML = "You Lose!"
                         return
                         }else if(playerScore > computerScore){
-                        console.log("You win!")
+                        document.querySelector("#resultado").innerHTML = "You win!"
                         return
                         }else {
-                        console.log("Draw in the game!")
+                        document.querySelector("#resultado").innerHTML = "Draw in the game!"
                         return
                         }
                 }
+                document.querySelector("#resultado").innerHTML = " "
             })})    
     } 
-    
+
 playGame()
