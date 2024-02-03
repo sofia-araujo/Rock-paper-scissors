@@ -44,9 +44,13 @@ function playGame(){
                     playerScore = 0
                     document.querySelector("#player-score").innerHTML = playerScore.toString()
                     document.querySelector("#computer-score").innerHTML = computerScore.toString()
+                    document.querySelector("#player-choice").innerHTML = " "
+                    document.querySelector("#computer-choice").innerHTML = " "
                 }
                 playerChoice = this.textContent
                 let computerChoice = getComputerChoice()
+                document.querySelector("#player-choice").innerHTML = playerChoice
+                document.querySelector("#computer-choice").innerHTML = computerChoice
                 if(playerRound(computerChoice, playerChoice) == "You Win!"){
                     playerScore++
                     document.querySelector("#player-score").innerHTML = playerScore.toString()
